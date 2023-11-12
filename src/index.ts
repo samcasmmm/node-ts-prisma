@@ -1,7 +1,17 @@
 import express, { Application } from 'express';
+
+import compression from 'compression';
+import cors from 'cors';
+import morgan from 'morgan';
+
 import connectDatabase from './config/connectDatabase.js';
+import HttpLogger from './middlewares/logger.middleware.js';
 
 const app: Application = express();
+
+app.use(express.json());
+app.use(cors());
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   res.send({
@@ -12,6 +22,31 @@ app.get('/', (req, res) => {
     data: '',
   });
 });
+
+app.get('/health', (req, res) => {
+  res.send({
+    status: res.statusCode,
+    message: 'success',
+    url: req.url,
+    meta: '',
+    data: 'health is okay',
+  });
+});
+app.get('/time', (req, res) => {
+  let mr = morgan('combined');
+  console.log(mr);
+  setTimeout(() => {
+    res.send({
+      status: res.statusCode,
+      message: 'success',
+      url: req.url,
+      meta: '',
+      data: mr,
+    });
+  }, 5);
+});
+
+app.use(HttpLogger);
 
 const startServer = () => {
   app.listen(9001, () => {
