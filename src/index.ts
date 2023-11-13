@@ -6,6 +6,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import connectDatabase from './config/connectDatabase.js';
+import validateEnv from './utils/validateEnv.js';
 
 const app: Application = express();
 
@@ -50,6 +51,7 @@ const startServer = () => {
   app.listen(9001, () => {
     console.log('working');
     connectDatabase();
+    validateEnv();
     console.log(`Server listening on http://localhost:${9001}`);
   });
 };
