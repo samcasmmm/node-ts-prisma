@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
 import path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
 
 import compression from 'compression';
 import cors from 'cors';
@@ -9,6 +11,7 @@ import connectDatabase from './config/connectDatabase.js';
 import validateEnv from './utils/validateEnv.js';
 
 const app: Application = express();
+const { PORT } = process.env;
 
 app.use(express.json());
 app.use(cors());
@@ -48,11 +51,11 @@ app.get('/time', (req, res) => {
 });
 
 const startServer = () => {
-  app.listen(9001, () => {
+  app.listen(PORT, () => {
     console.log('working');
-    connectDatabase();
+    // connectDatabase();
     validateEnv();
-    console.log(`Server listening on http://localhost:${9001}`);
+    console.log(`Server listening on http://localhost:${PORT}`);
   });
 };
 
