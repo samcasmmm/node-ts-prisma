@@ -1,11 +1,11 @@
 import express, { Application } from 'express';
+import path from 'path';
 
 import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
 
 import connectDatabase from './config/connectDatabase.js';
-import HttpLogger from './middlewares/logger.middleware.js';
 
 const app: Application = express();
 
@@ -45,8 +45,6 @@ app.get('/time', (req, res) => {
     });
   }, 5);
 });
-
-app.use(HttpLogger);
 
 const startServer = () => {
   app.listen(9001, () => {
