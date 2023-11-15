@@ -1,6 +1,6 @@
-import mysql from 'mysql2';
+import mysql from 'mysql';
 
-var con = mysql.createConnection({
+export const SQL = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
@@ -8,7 +8,7 @@ var con = mysql.createConnection({
 });
 
 const connectDB = () => {
-  con.connect(function (err: any) {
+  SQL.connect(function (err: any) {
     if (err) {
       console.log('Error connecting to Db');
       console.log(err);
@@ -18,3 +18,14 @@ const connectDB = () => {
   });
 };
 export default connectDB;
+
+export const getUsers = async () => {
+  try {
+    SQL.query('SELECT * FROM users', (err, res) => {
+      console.log('Query Done');
+      return res;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
