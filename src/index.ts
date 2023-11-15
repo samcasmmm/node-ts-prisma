@@ -7,7 +7,7 @@ import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import connectDatabase from './config/connectDatabase.js';
+import connectDatabase, { SQL, getUsers } from './config/connectDatabase.js';
 import validateEnv from './utils/validateEnv.js';
 
 const app: Application = express();
@@ -17,14 +17,20 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 
-app.get('/', (req, res) => {
-  res.send({
-    status: res.statusCode,
-    message: 'success',
-    url: req.url,
-    meta: '',
-    data: '',
-  });
+app.get('/', async (req, res) => {
+  try {
+    SQL.query('SELECT * FROM users', (err, data) => {
+      res.send({
+        status: res.statusCode,
+        message: 'success',
+        url: req.url,
+        meta: '',
+        data: data,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get('/health', (req, res) => {
@@ -53,8 +59,9 @@ app.get('/time', (req, res) => {
 const startServer = () => {
   app.listen(PORT, () => {
     console.log('working');
-    // connectDatabase();
-    validateEnv();
+    connectDatabase();
+    // validateEnv();
+
     console.log(`Server listening on http://localhost:${PORT}`);
   });
 };
