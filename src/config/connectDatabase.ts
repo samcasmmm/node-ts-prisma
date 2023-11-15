@@ -1,5 +1,20 @@
-import { PrismaClient } from '@prisma/client';
+import mysql from 'mysql';
 
-const prisma = new PrismaClient();
+var con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'admin',
+  database: 'test',
+});
 
-export default prisma;
+const connectDB = () => {
+  con.connect(function (err: any) {
+    if (err) {
+      console.log('Error connecting to Db');
+      console.log(err);
+      return;
+    }
+    console.log('Connection established');
+  });
+};
+export default connectDB;

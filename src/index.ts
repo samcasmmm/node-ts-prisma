@@ -53,8 +53,8 @@ app.get('/time', (req, res) => {
 const startServer = () => {
   app.listen(PORT, () => {
     console.log('working');
-    // connectDatabase();
-    validateEnv();
+    connectDatabase();
+    // validateEnv();
     console.log(`Server listening on http://localhost:${PORT}`);
   });
 };
