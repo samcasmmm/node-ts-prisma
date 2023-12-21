@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
 
 
 app.get('/template', (req, res) => {
-   const { uid, pid, tid } = req.query;
+   const { uid, pid, tid, html } = req.query;
 
-   if (uid === undefined || pid === undefined || tid === undefined) {
+   if (uid === undefined || pid === undefined || tid === undefined, html === undefined) {
       res.status(400).json({ error: 'Please provide all parameters' });
    } else {
       res.json({ UserId: uid, PropertyId: pid, TemplateId: tid })
