@@ -17,19 +17,9 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use('/graphql', expressMiddleware)
 
-
-
-
-
-
-
 app.get('/', (req, res) => {
    res.json({ msg: 'Hello' })
 })
-
-
-
-
 
 const startServer = async () => {
    app.listen(port, async () => {
