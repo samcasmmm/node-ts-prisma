@@ -6,7 +6,6 @@ dotenv.config()
 // @ Imported File
 import app from './src/app.js'
 
-// @ Graphql init
 
 
 // @ In-built Middleware
