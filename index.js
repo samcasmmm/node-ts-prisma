@@ -14,13 +14,17 @@ import { connectDB } from './src/config/index.js';
 // @ Custom  Middleware
 
 
-// @ fn Start Server
 const startServer = async () => {
-   app.listen(process.env.PORT, async () => {
-      console.log(`Runing on http://localhost:${process.env.PORT}`);
-      connectDB()
-   })
+   try {
+      connectDB(process.env.MONGODB_URL);
+   } catch (error) {
+      console.log(error);
+   }
+   app.listen(process.env.PORT, () => {
+      console.log(
+         `${process.env.NODE_ENV} server on http://localhost:${process.env.PORT}`
+      );
+   });
 };
 
-// @ start server
 startServer();
