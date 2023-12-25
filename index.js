@@ -5,6 +5,7 @@ dotenv.config()
 
 // @ Imported File
 import app from './src/app.js'
+import { connectDB } from './src/config/index.js';
 
 
 
@@ -17,6 +18,7 @@ import app from './src/app.js'
 const startServer = async () => {
    app.listen(process.env.PORT, async () => {
       console.log(`Runing on http://localhost:${process.env.PORT}`);
+      connectDB()
    })
 };
 
