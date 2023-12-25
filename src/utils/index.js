@@ -1,5 +1,4 @@
-function greet(params) {
-   console.log('asdasd')
-}
+import sendResponse from './response.js';
 
-export default greet
+
+export { sendResponse }
