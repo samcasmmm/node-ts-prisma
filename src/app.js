@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
 app.get('/error', (req, res) => {
    sendResponse(res, 'error', null, null, 404, 'Resource not found');
 });
+app.get('/ec2', (req, res) => {
+   sendResponse(res, 'error', null, null, 404, 'Resource not found');
+});
+
 
 app.use(errorMiddleware)
 app.use(notFoundMiddleware)
