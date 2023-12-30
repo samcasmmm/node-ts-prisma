@@ -30,10 +30,10 @@ app.get('/token', (req, res) => {
       message: "Token is generated1",
       data: token({ id: 2 })
    })
-   // sendResponse(res, 'success', null, { token: token({ id: 2 }) }, 200, 'Token Generated');
+
 });
 
 
-// app.use(errorMiddleware)
-// app.use(notFoundMiddleware)
+app.use(errorMiddleware)
+app.use(notFoundMiddleware)
 export default app;
