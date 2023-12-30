@@ -1,8 +1,9 @@
 import express from 'express'
 import morgan from 'morgan';
 import cors from 'cors'
-import { sendResponse } from './utils/index.js'
+import { sendResponse, token } from './utils/index.js'
 import { errorMiddleware, notFoundMiddleware } from './middlewares/error.middleware.js'
+
 
 const app = express();
 
@@ -20,11 +21,19 @@ app.get('/', (req, res) => {
 app.get('/error', (req, res) => {
    sendResponse(res, 'error', null, null, 404, 'Resource not found');
 });
-app.get('/ec2', (req, res) => {
-   sendResponse(res, 'error', null, null, 404, 'Resource not found');
+
+app.get('/token', (req, res) => {
+
+   res.json({
+      meta: null,
+      status: 200,
+      message: "Token is generated1",
+      data: token({ id: 2 })
+   })
+   // sendResponse(res, 'success', null, { token: token({ id: 2 }) }, 200, 'Token Generated');
 });
 
 
-app.use(errorMiddleware)
-app.use(notFoundMiddleware)
+// app.use(errorMiddleware)
+// app.use(notFoundMiddleware)
 export default app;
